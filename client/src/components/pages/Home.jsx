@@ -13,7 +13,7 @@ import heartDivider from '../../assets/images/heartDivider.gif'
 const Home = () => {
 	return (
 		<div className='home page'>
-			<div className='picture'>
+			<div className='home-picture'>
 				<img src={heartDivider} alt='heartDivider' />
 				<img src={picture} alt='picture' />
 				<img src={heartDivider} alt='heartDivider' />
@@ -74,7 +74,6 @@ const Home = () => {
 			<div className='event-details'>
 				<h3>Details:</h3>
 				<ul>
-					<li>vegetarian/vegan food available</li>
 					<li>free parking</li>
 					<li>
 						free drinks
@@ -93,51 +92,11 @@ const Home = () => {
 				</ul>
 			</div>
 			<img src={knot} alt='knot divider' />
-			<div className='lyrics'>
-				<h3>Now Playing: Nirvana - Come as you are</h3>
-				<div>
-					Come as you are, as you were
-					<br />
-					As I want you to be
-					<br />
-					As a friend, as a friend
-					<br />
-					As an old enemy
-					<br />
-					<br />
-					Take your time, hurry up
-					<br />
-					Choice is yours, don't be late
-					<br />
-					Take a rest, as a friend
-					<br />
-					As an old enemy, yeah
-					<br />
-					<br />
-					Memoria x3
-					<br />
-					<br />
-					Come doused in mud, soaked in bleach
-					<br />
-					As I want you to be
-					<br />
-					As a trend, as a friend
-					<br />
-					As a known enemy, yeah
-					<br />
-					<br />
-					Memoria x3
-					<br />
-					When I swear that I don't have a gun
-					<br />
-					No, I don't have a gun (repeat till the end of the song i think)
-					<br />
-				</div>
-			</div>
-			<img src={knot} alt='knot divider' />
 			<div className='picture'>
 				<img src={savethedate} alt='save the date' />
 			</div>
+	
+			<img src={knot} alt='knot divider' />
 		</div>
 	)
 }

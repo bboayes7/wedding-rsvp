@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import hope from '../../assets/images/hope.jpg'
+import faqsTitle from '../../assets/images/faqwordart.png'
 
 const faqs = [
 	{
@@ -6,7 +8,7 @@ const faqs = [
 		answer: 'Please RSVP By September 11, 2022.',
 	},
 	{
-		question: 'Is the a dress code?',
+		question: 'Is there a dress code?',
 		answer: 'Business Casual. No Jeans tho, ew gross.',
 	},
 	{
@@ -48,15 +50,20 @@ const faqs = [
 const Faqs = () => {
 	return (
 		<div className='faqs page'>
-			<h1>FAQS</h1>
+			<div className='faqs-title'>
+				<img className='wordart' src={faqsTitle} alt='faqs wordart' />
+			</div>
 			<div className='faqs-list'>
 				{faqs.map(({ question, answer, to }) => (
-					<div>
+					<div className='faq'>
 						<h2>{question}</h2>
 						<h4>{answer}</h4>
 						{to ? <Link to={to}>Here</Link> : null}
 					</div>
 				))}
+			</div>
+			<div className='picture'>
+				<img src={hope} alt='barry and kasey looking up' />
 			</div>
 		</div>
 	)

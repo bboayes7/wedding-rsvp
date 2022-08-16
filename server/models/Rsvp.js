@@ -4,8 +4,8 @@ const rsvpSchema = new mongoose.Schema(
 	{
 		name: { type: String, required: true },
 		email: String,
-		attending: { type: Boolean, required: true, default: null },
-		guests: Number,
+		attending: { type: Boolean, required: true, default: false },
+		guests: { type: Number, required: true, default: 0 },
 		song: String,
 		comments: String,
 	},

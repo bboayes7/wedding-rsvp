@@ -6,11 +6,14 @@ const {
 	postRSVP,
 	deleteRSVP,
 	getOneRSVP,
+	getGuestList,
 } = require('../controllers/rsvpController')
 
 router.get('/:name', getRSVP)
 
 router.get('/id/:id', getOneRSVP)
+
+router.get('/', getGuestList)
 
 router.put('/:id', updateRSVP)
 
