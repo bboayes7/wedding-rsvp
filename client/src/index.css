@@ -5,6 +5,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #efefef;
+
+}
+html {
+  cursor: url("./assets/images/cursor.png"), auto;
+}
+a {
+  cursor: url("./assets/images/hover.png"), pointer;
 }
 
 .container {
@@ -105,12 +112,19 @@ body {
   font-weight: bold;
 }
 
-.general-nav ul li a {
-  color: #000;
+.active li{
+  color: purple !important;
+}
+.general-nav ul li .active {
+  color: purple !important;
+}
+.general-nav ul li {
+  color: blue;
   text-decoration: none;
 }
-.general-nav ul li a:hover {
-  color: #f9f9f9;
+.general-nav ul li:hover {
+  color: yellow;
+  background-color: lightpink;
   text-decoration: underline;
 }
 
@@ -284,6 +298,32 @@ a .rsvp-nav {
   justify-content: center;
 }
 
+/* Media Queries */
+/* FAQs */
+@media screen and (max-width: 768px) {
+  .faqs {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .faqs-title {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .faqs-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
 /* FAQs */
 .faqs {
   display: flex;
@@ -302,8 +342,7 @@ a .rsvp-nav {
 .faqs-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 60%;
 }
 
 .faq {
@@ -397,22 +436,23 @@ a .rsvp-nav {
   box-shadow: #000 0px 5px 4px;
   margin: 2%;
 }
-.find-rsvp {
-  margin: 2%;
-}
+
 .form-control {
   margin: 20px 0;
   text-align: center;
 }
 
 .form-control-check label {
-  margin: 10px;
+  padding: 10px 10px 10px 5px;
 }
+
+
+.form-control-check label+input[type="radio"]:checked{ font-weight: bold; } 
 
 .form-control-check {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
+  justify-content: space-around;
 }
 
 .form-control label {
@@ -446,6 +486,17 @@ a .rsvp-nav {
   font-weight: bold;
 }
 
+.rsvp-decision-item p{
+  margin: 0 1em;
+}
+.rsvp-decision-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 /* Media Queries */
 /* RSVP */
 @media screen and (max-width: 768px) {
@@ -461,6 +512,10 @@ a .rsvp-nav {
     width: 100%;
   }
 
+  .rsvp-list-item {
+   background-position: center;
+  }
+
   .rsvp-details{
     width: 100%;
   }
@@ -468,4 +523,43 @@ a .rsvp-nav {
   .thanks {
     width: 100%;
   }
+}
+
+/* Admin */
+
+.admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.guest-list {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  text-align: center;
+}
+
+.guest-list tr th {
+  padding: 1em;
+}
+.add-rsvp {
+  text-align: center;
+}
+.add-rsvp form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;  
+  margin: 1em;
 }

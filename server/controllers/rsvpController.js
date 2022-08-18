@@ -2,59 +2,140 @@ const RSVP = require('../models/Rsvp')
 const nodemailer = require('nodemailer')
 
 const getGuestList = async (req, res) => {
-	const rsvp = await RSVP.find()
-	res.status(200).json(rsvp)
+	try {
+		const rsvp = await RSVP.find()
+		if (rsvp.length === 0) {
+			return res.status(404).json({
+				message: 'No guests found',
+			})
+		}
+
+		console.log(`GET guest list returned: ${rsvp}`)
+		res.status(200).json(rsvp)
+	} catch (err) {
+		console.log(err)
+		res.status(500).json({ message: 'Error getting guest list' })
+	}
 }
 
 const getRSVP = async (req, res) => {
 	const guestName = req.params.name
-	const rsvp = await RSVP.find({ name: new RegExp(guestName, 'i') })
-	console.log(`GET partial rsvp returned: ${rsvp}`)
-	res.status(200).json(rsvp)
+	if (!guestName) {
+		return res.status(400).json({ msg: 'No name provided' })
+	}
+	if (guestName.length < 3) {
+		return res.status(400).json({ msg: 'Name must be at least 3 characters' })
+	}
+	if (guestName.length > 20) {
+		return res.status(400).json({ msg: 'Name must be less than 20 characters' })
+	}
+	if (!guestName.match(/^[a-zA-Z]+$/)) {
+		return res.status(400).json({ msg: 'Name must be alphabetic' })
+	}
+	try {
+		const rsvp = await RSVP.find({ name: new RegExp(guestName, 'i') })
+		res.status(200).json(rsvp)
+	} catch (err) {
+		console.error(err.message)
+		res.status(500).send('Server Error')
+	}
 }
 
 const getOneRSVP = async (req, res) => {
 	const id = req.params.id
-	console.log(id)
-	const rsvp = await RSVP.findById(id)
-	console.log(`GET one RSVP returned: ${rsvp}`)
-	res.status(200).json(rsvp)
+	if (!id) {
+		return res.status(400).json({
+			error: 'No id provided',
+		})
+	}
+
+	try {
+		const rsvp = await RSVP.findById(id)
+		res.status(200).json(rsvp)
+	} catch (err) {
+		res.status(500).json({
+			error: err,
+		})
+	}
 }
 
 const updateRSVP = async (req, res) => {
 	const id = req.params.id
+	if (!id) {
+		return res.status(400).json({
+			message: 'Id is required',
+		})
+	}
+
 	console.log(id)
-	let rsvp = await RSVP.findById(id)
-	const { email, attending, song, comments } = req.body
-	await rsvp.updateOne({ attending, song, comments, email })
-	rsvp = await RSVP.findById(id)
-	res.status(200).json(rsvp)
-	if (email) {
-		emailConfirmation(rsvp)
-		emailNotification(rsvp)
+	try {
+		let rsvp = await RSVP.findById(id)
+		const { email, guestsAttending, song, comments } = req.body
+		await rsvp.updateOne({ guestsAttending, song, comments, email })
+		rsvp = await RSVP.findById(id)
+		res.status(200).json(rsvp)
+		if (email) {
+			try {
+				emailConfirmation(rsvp)
+				emailNotification(rsvp)
+			} catch (err) {
+				console.log(err)
+			}
+		}
+	} catch (err) {
+		res.status(500).json({
+			message: err.message,
+		})
 	}
 }
 
 const postRSVP = async (req, res) => {
-	if (!req.body.name) {
-		return res.status(400).json({
-			message: 'Name is required',
-		})
+	const { name, guestsInvited } = req.body
+
+	if (!name || !guestsInvited) {
+		res.status(400).json({ message: 'Please fill out all fields' })
 	}
-	const { name, guests } = req.body
-	console.log(`POST: ${name} ${guests}`)
-	const rsvp = await RSVP.create({
-		name,
-		guests,
-	})
-	res.status(200).json(rsvp)
+	try {
+		const attendanceList = createAttendanceList(guestsInvited)
+		const rsvp = await RSVP.create({
+			name,
+			guestsInvited,
+			guestsAttending: attendanceList,
+		})
+		res.status(200).json(rsvp)
+	} catch (err) {
+		console.error(err.message)
+		res.status(500).send('Server Error')
+	}
+}
+
+const createAttendanceList = (guestsInvited) => {
+	if (guestsInvited === 0) {
+		return []
+	}
+
+	const attendanceList = []
+	for (let i = 0; i < guestsInvited; i++) {
+		attendanceList.push(false)
+	}
+	return attendanceList
 }
 
 const deleteRSVP = async (req, res) => {
-	const {id }= req.params
-	console.log(`id: ${id}`)
-  const rsvp = await RSVP.findByIdAndDelete(id)
-	res.status(200).json(rsvp)
+	const { id } = req.params
+	if (!id) {
+		return res.status(400).json({
+			message: 'Id is required',
+		})
+	}
+	try {
+		console.log(`id: ${id}`)
+		const rsvp = await RSVP.findByIdAndDelete(id)
+		res.status(200).json(rsvp)
+	} catch (err) {
+		console.error(err.message)
+		res.status(500).send('Server Error')
+	}
 }
 
 //Email
@@ -76,8 +157,12 @@ const emailConfirmation = (rsvp) => {
 		text: `Thanks for the RSVP, ${
 			rsvp.name
 		}. We look forward to seeing you at the party! \nYour RSVP details: \n${
-			rsvp.attending
-				? `You are attending with a party of ${rsvp.guests}`
+			rsvp.guestsAttending.filter((attending) => attending).length > 0
+				? `You are attending with a party of ${
+						rsvp.guestsAttending.filter((decision) => {
+							return decision
+						}).length
+				  }`
 				: 'You are not attending'
 		}. \n${
 			rsvp.song ? `You want to hear ${rsvp.song}` : 'whatever is playing'
@@ -87,14 +172,17 @@ const emailConfirmation = (rsvp) => {
 				: 'nothing'
 		}`,
 	}
-
-	transporter.sendMail(mailOptions, (err, info) => {
-		if (err) {
-			console.log(err)
-		} else {
-			console.log(info)
-		}
-	})
+	try {
+		transporter.sendMail(mailOptions, (err, info) => {
+			if (err) {
+				console.log(err)
+			} else {
+				console.log(info)
+			}
+		})
+	} catch (err) {
+		console.log(err)
+	}
 }
 
 const emailNotification = (rsvp) => {
@@ -104,7 +192,7 @@ const emailNotification = (rsvp) => {
 		subject: `${rsvp.name} has RSVPed!`,
 		text: `${rsvp.name} has RSVPed! ${
 			rsvp.attending
-				? `${rsvp.name} is attending with a party of ${rsvp.guests}`
+				? `${rsvp.name} is attending with a party of ${rsvp.guestsInvited}`
 				: 'They are not attending'
 		}. ${rsvp.song ? `They are want to hear ${rsvp.song}` : 'nothing'} ${
 			rsvp.comments
@@ -112,13 +200,17 @@ const emailNotification = (rsvp) => {
 				: 'nothing'
 		}`,
 	}
-	transporter.sendMail(mailOptions, (err, info) => {
-		if (err) {
-			console.log(err)
-		} else {
-			console.log(info)
-		}
-	})
+	try {
+		transporter.sendMail(mailOptions, (err, info) => {
+			if (err) {
+				console.log(err)
+			} else {
+				console.log(info)
+			}
+		})
+	} catch (err) {
+		console.log(err)
+	}
 }
 
 module.exports = {

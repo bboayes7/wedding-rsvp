@@ -17,12 +17,12 @@ const RSVPDetails = ({ guest }) => {
 								<td>{guest.name}</td>
 							</tr>
 							<tr>
-								<th>Party of</th>
-								<td>{guest.guests}</td>
+								<th>Invited Party of</th>
+								<td>{guest.guestsInvited}</td>
 							</tr>
 							<tr>
-								<th>Attending</th>
-								<td>{guest.attending ? 'Yes' : 'No'}</td>
+								<th>Guests Attending Ceremony</th>
+								<td>{guest.guestsAttending.filter((decision) => {return decision}).length}</td>
 							</tr>
 							{!guest.song ? null : (
 								<tr>

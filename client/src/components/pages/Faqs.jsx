@@ -5,7 +5,7 @@ import faqsTitle from '../../assets/images/faqwordart.png'
 const faqs = [
 	{
 		question: 'When is the RSVP Deadline?',
-		answer: 'Please RSVP By September 11, 2022.',
+		answer: 'Please RSVP By September 10, 2022.',
 	},
 	{
 		question: 'Is there a dress code?',

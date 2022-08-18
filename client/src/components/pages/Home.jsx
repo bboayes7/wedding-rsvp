@@ -10,6 +10,7 @@ import wow from '../../assets/images/wow.gif'
 import picture from '../../assets/images/romantic.jpg'
 import savethedate from '../../assets/images/savethedate.jpg'
 import heartDivider from '../../assets/images/heartDivider.gif'
+
 const Home = () => {
 	return (
 		<div className='home page'>

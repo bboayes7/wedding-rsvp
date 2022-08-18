@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import RSVPDecision from './RSVPDecision'
 
 const RSVPForm = ({ rsvp }) => {
-    const navigate = useNavigate()
-	const [id, setId] = useState(rsvp._id)
-	const [attending, setAttending] = useState(rsvp.attending)
+	const navigate = useNavigate()
+	const [id] = useState(rsvp._id)
+	const [guestsInvited] = useState(rsvp.guestsInvited)
+	const [guestsAttending, setGuestsAttending] = useState(rsvp.guestsAttending)
 	const [song, setSong] = useState(rsvp.song)
 	const [comments, setComments] = useState(rsvp.comments)
 	const [email, setEmail] = useState(rsvp.email)
@@ -13,54 +15,43 @@ const RSVPForm = ({ rsvp }) => {
 	const updateRSVP = async () => {
 		const updatedRSVP = {
 			_id: id,
-			attending: attending,
+			guestsInvited: guestsInvited,
+			guestsAttending: [...guestsAttending],
 			song: song,
 			comments: comments,
 			email: email,
 		}
 		console.log(updatedRSVP)
-        await axios.put(`http://localhost:5000/api/rsvp/${id}`, updatedRSVP).then(res => {
-            console.log(res)
-        }).catch(err => {
-            console.log(err)
-        }
-        )
+		await axios
+			.put(`http://localhost:5000/api/rsvp/${id}`, updatedRSVP)
+			.then((res) => {
+				console.log(res)
+			})
+			.catch((err) => {
+				console.log(err)
+			})
 	}
 
 	const onSubmit = (e) => {
-		e.preventDefault()
+		try {
+			e.preventDefault()
 
-		updateRSVP({ id, attending, song, comments, email })
-        navigate('/thanks')
+			updateRSVP({ id, guestsInvited, guestsAttending, song, comments, email })
+			navigate('/thanks')
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	return (
 		<div>
 			<form onSubmit={onSubmit}>
-				<div className='form-control-check'>
-					<label htmlFor='attending'>
-					<input
-						type='radio'
-						name='attending'
-						id='attending'
-						value={attending}
-						checked={attending ? true : false}
-						onChange={(e) => setAttending(true)}
-						/>
-						Attending 
-					</label>
-					<label htmlFor='notAttending'>
-					<input
-						type='radio'
-						name='attending'
-						id='notAttending'
-						value={attending}
-						checked={attending ? false : true}
-						onChange={(e) => setAttending(false)}
-						/>
-						Not Attending
-					</label>
-				</div>
+				<RSVPDecision
+					name={rsvp.name}
+					guestsAttending={guestsAttending}
+					setGuestsAttending={setGuestsAttending}
+				/>
+
 				<div className='form-control'>
 					<label>
 						What song do we need to play to get you on the dance floor?{' '}

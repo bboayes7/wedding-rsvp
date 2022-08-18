@@ -22,7 +22,7 @@ const RSVPList = ({
 						return (
 							<div onClick={() => setGuest(guest) } className='rsvp-list-item' key={guest._id}>
 								<h2>{guest.name}</h2>
-								<p>Party of: {guest.guests}</p>
+								<p>Party of: {guest.guestsInvited}</p>
 								<button className="rsvp-btn" onClick={() => setGuest(guest) }>View/Update RSVP</button>
 							</div>
 						)

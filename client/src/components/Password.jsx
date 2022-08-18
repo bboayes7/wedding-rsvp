@@ -1,7 +1,5 @@
-import anime from '../assets/images/anime.jpg'
+import welcome from '../assets/images/welcome.gif'
 const Password = ({ password, setPassword, setIsPasswordValid }) => {
-
-
 	const handlePassword = (e) => {
 		setPassword(e.target.value)
 	}
@@ -11,9 +9,6 @@ const Password = ({ password, setPassword, setIsPasswordValid }) => {
 		if (password === process.env.REACT_APP_PASSWORD) {
 			console.log('correct')
 			setIsPasswordValid(true)
-		} else if (password === 'admin') {
-			console.log('correct')
-			setIsPasswordValid(true)
 		} else {
 			console.log('incorrect')
 		}
@@ -21,7 +16,7 @@ const Password = ({ password, setPassword, setIsPasswordValid }) => {
 
 	return (
 		<div className='password-form'>
-			<img src={anime} alt='anime' />
+			<img src={welcome} alt='welcome gif' />
 			<h1>Enter the password to view the website:</h1>
 			<form>
 				<label>

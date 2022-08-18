@@ -40,6 +40,7 @@ const RSVP = () => {
 				''
 			)}
 			{showRSVPDetails ? <RSVPDetails guest={selectedGuest} /> : ''}
+
 		</div>
 	)
 }

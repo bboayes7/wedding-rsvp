@@ -28,8 +28,7 @@ function App() {
 
 	return (
 		<div className='container'>
-			{ isPasswordValid ? (
-
+			{isPasswordValid ? (
 				<Router>
 					<Header />
 					<Routes>
@@ -39,7 +38,7 @@ function App() {
 						<Route path='/photos' element={<Photos />} />
 						<Route path='/rsvp' element={<RSVP />} />
 						<Route path='/thanks' element={<Thanks />} />
-						<Route path='/admin' element={<Admin />} />
+						<Route path='/admin' element={<Admin  setIsPasswordValid={setIsPasswordValid}/>} />
 					</Routes>
 					<Footer />
 				</Router>
@@ -49,7 +48,7 @@ function App() {
 					setPassword={setPassword}
 					setIsPasswordValid={setIsPasswordValid}
 				/>
-			)} 
+			)}
 		</div>
 	)
 }

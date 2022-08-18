@@ -1,5 +1,6 @@
 import axios from 'axios'
-
+import { useNavigate } from 'react-router-dom'
+import anime from '../../assets/images/anime.jpg'
 const FindRSVP = ({
 	guestName,
 	setGuestBook,
@@ -7,10 +8,21 @@ const FindRSVP = ({
 	setShowFindRSVP,
 	setShowRSVPList,
 }) => {
+	const navigate = useNavigate()
 	const onSubmit = (e) => {
-		e.preventDefault()
-		getRSVP(guestName)
-		setGuestName('')
+		try {
+			e.preventDefault()
+			if (guestName === 'admin') {
+				navigate('/admin')
+			}
+			if (!guestName) {
+				return
+			}
+			getRSVP(guestName)
+			setGuestName('')
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	const getRSVP = async (guestName) => {
@@ -23,7 +35,7 @@ const FindRSVP = ({
 					setShowRSVPList(false)
 					return
 				}
-                setShowFindRSVP(false)
+				setShowFindRSVP(false)
 				setShowRSVPList(true)
 			})
 			.catch((err) => {
@@ -42,6 +54,9 @@ const FindRSVP = ({
 				/>
 				<button type='submit'>Find</button>
 			</form>
+			<div className='picture'>
+				<img src={anime} alt='anime' />
+			</div>
 		</div>
 	)
 }
