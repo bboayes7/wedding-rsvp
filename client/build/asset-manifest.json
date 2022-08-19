@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.af7c08ee.css",
+    "main.js": "/static/js/main.58158b9b.js",
+    "static/media/comeasyouare.mp3": "/static/media/comeasyouare.efadeaee7162e7be8101.mp3",
+    "static/media/nophotos.jpg": "/static/media/nophotos.16d5c321350eec5f7bc2.jpg",
+    "static/media/hope.jpg": "/static/media/hope.bf2c981bb586d6c415f0.jpg",
+    "static/media/happy.jpg": "/static/media/happy.b0d6fe1377b80013774c.jpg",
+    "static/media/savethedate.jpg": "/static/media/savethedate.e828a0aa9d8a5fc61471.jpg",
+    "static/media/bbys.jpg": "/static/media/bbys.08be7833ba6042738a31.jpg",
+    "static/media/welcome.gif": "/static/media/welcome.4b956d67290f6d7893ae.gif",
+    "static/media/weddingWordArt.png": "/static/media/weddingWordArt.d59a5a908eeeb97df0d6.png",
+    "static/media/romantic.jpg": "/static/media/romantic.827a5ec3ecc1ce6b99de.jpg",
+    "static/media/faqwordart.png": "/static/media/faqwordart.de6fa39d45d69bfac990.png",
+    "static/media/rsvp.png": "/static/media/rsvp.01a66dddedd7d5af62e1.png",
+    "static/media/anime.jpg": "/static/media/anime.bdfd2a1921173c548667.jpg",
+    "static/media/plane.gif": "/static/media/plane.e1be28913680c4194755.gif",
+    "static/media/bbykc.png": "/static/media/bbykc.9496290f23bc8fabc9c2.png",
+    "static/media/bbybarry.png": "/static/media/bbybarry.39492b44fc9c416ec66d.png",
+    "static/media/rabbit.gif": "/static/media/rabbit.2cbbf37d0858c1ae9535.gif",
+    "static/media/travel.png": "/static/media/travel.821b39f668d8e53d01e3.png",
+    "static/media/car.gif": "/static/media/car.0afee753c850bf4f7a16.gif",
+    "static/media/fireDivider.gif": "/static/media/fireDivider.272b8dc30c050a91d175.gif",
+    "static/media/train.gif": "/static/media/train.f4506656767846bd1218.gif",
+    "static/media/beer.gif": "/static/media/beer.95aea1cacb07924cfa8b.gif",
+    "static/media/gd-divider.gif": "/static/media/gd-divider.2489b8b1dd0703384805.gif",
+    "index.html": "/index.html",
+    "main.af7c08ee.css.map": "/static/css/main.af7c08ee.css.map",
+    "main.58158b9b.js.map": "/static/js/main.58158b9b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.af7c08ee.css",
+    "static/js/main.58158b9b.js"
+  ]
+}
