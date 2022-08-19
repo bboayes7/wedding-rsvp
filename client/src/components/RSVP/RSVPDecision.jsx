@@ -32,6 +32,7 @@ const RSVPDecision = ({ name, guestsAttending, setGuestsAttending }) => {
 							
 							<div className='form-control-check'>
 								<label
+									className='attending-label'
 									style={
 										decision
 											? { backgroundColor: 'black', color: 'white' }
@@ -50,6 +51,7 @@ const RSVPDecision = ({ name, guestsAttending, setGuestsAttending }) => {
 									Attending
 								</label>
 								<label
+								className='not-attending-label'
 									style={
 										!decision
 											? { backgroundColor: 'black', color: 'white' }

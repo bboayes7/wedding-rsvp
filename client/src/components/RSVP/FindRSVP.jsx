@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import anime from '../../assets/images/anime.jpg'
+import { useState } from 'react'
 const FindRSVP = ({
 	guestName,
 	setGuestBook,
@@ -9,13 +10,20 @@ const FindRSVP = ({
 	setShowRSVPList,
 }) => {
 	const navigate = useNavigate()
+	const [guestError, setGuestError] = useState(false)
+
 	const onSubmit = (e) => {
+		e.preventDefault()
 		try {
-			e.preventDefault()
 			if (guestName === 'admin') {
 				navigate('/admin')
 			}
-			if (!guestName) {
+			if (!guestName || guestName.length === 0 ) {
+				setGuestError(true)
+				setTimeout(() => {
+					setGuestError(false)
+				}, 1000)
+
 				return
 			}
 			getRSVP(guestName)
@@ -46,7 +54,7 @@ const FindRSVP = ({
 	return (
 		<div className='find-rsvp'>
 			<p>Enter the name on the invitation:</p>
-			<form onSubmit={onSubmit}>
+			<form className={guestError ? 'shake' : ''} onSubmit={onSubmit}>
 				<input
 					type='text'
 					value={guestName}

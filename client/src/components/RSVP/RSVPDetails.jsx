@@ -4,7 +4,6 @@ import heartDivider from '../../assets/images/nicerHeartDivider.gif'
 
 const RSVPDetails = ({ guest }) => {
 	const [toggleRSVPForm, setToggleRSVPForm] = useState(false)
-
 	return (
 		<div class='rsvp-details'>
 			<img src={heartDivider} alt='heart divider' />
@@ -55,19 +54,3 @@ const RSVPDetails = ({ guest }) => {
 }
 
 export default RSVPDetails
-
-// <p>
-// 	<h2>{guest.name}</h2>
-// 	<p>Party of: {guest.guests}</p>
-// 	<p>
-// 		<b>{guest.attending ? 'Attending' : 'Not Attending'}</b>
-// 	</p>
-// 	<p>{guest.attending ? 'Song: ' + guest.song : ''}</p>
-// 	<p>{guest.attending ? 'Comments: ' + guest.comments : ''}</p>
-// <button
-// 	className='rsvp-btn'
-// 	onClick={() => setToggleRSVPForm(!toggleRSVPForm)}
-// >
-// 	Edit / Update RSVP{' '}
-// </button>
-// </>

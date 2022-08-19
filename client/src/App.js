@@ -15,7 +15,6 @@ import comeasyouare from './assets/music/comeasyouare.mp3'
 
 function App() {
 	const [song] = useState(new Audio(comeasyouare))
-	const [password, setPassword] = useState('')
 	const [isPasswordValid, setIsPasswordValid] = useState(false)
 
 	useEffect(() => {
@@ -44,8 +43,6 @@ function App() {
 				</Router>
 			) : (
 				<Password
-					password={password}
-					setPassword={setPassword}
 					setIsPasswordValid={setIsPasswordValid}
 				/>
 			)}
