@@ -3,7 +3,7 @@ import { useState } from 'react'
 const Password = ({ setIsPasswordValid }) => {
 	const [pwError, setPwError] = useState(false)
 	const [pw, setPw] = useState('')
-	
+
 	const handleSubmit = (e) => {
 		try {
 			e.preventDefault()
@@ -20,8 +20,8 @@ const Password = ({ setIsPasswordValid }) => {
 				setPwError(true)
 				setTimeout(() => {
 					setPwError(false)
-				} , 5000)
-			} else if (pw === process.env.REACT_APP_PASSWORD) {
+				}, 5000)
+			} else if (pw === '102222') {
 				console.log('correct')
 				setIsPasswordValid(true)
 			} else {
@@ -52,7 +52,14 @@ const Password = ({ setIsPasswordValid }) => {
 			</form>
 			{pwError ? (
 				<div className='pw-error'>
-					<p>try again! hint: savethedate <u><b><em>MMDDYY</em></b></u></p>
+					<p>
+						try again! hint: savethedate{' '}
+						<u>
+							<b>
+								<em>MMDDYY</em>
+							</b>
+						</u>
+					</p>
 				</div>
 			) : null}
 		</div>
