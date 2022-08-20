@@ -26,7 +26,7 @@ const Admin = ({ setIsPasswordValid }) => {
 		e.preventDefault()
 		setLoading(true)
 		axios
-			.post('/api/rsvp/', {
+			.post('http://localhost:5000/api/rsvp/', {
 				name: guestName,
 				guestsInvited: guestsInvited,
 			})
