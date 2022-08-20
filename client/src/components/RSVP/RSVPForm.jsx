@@ -23,7 +23,7 @@ const RSVPForm = ({ rsvp }) => {
 		}
 		console.log(updatedRSVP)
 		await axios
-			.put(`http://localhost:5000/api/rsvp/${id}`, updatedRSVP)
+			.put(`api/rsvp/${id}`, updatedRSVP)
 			.then((res) => {
 				console.log(res)
 			})

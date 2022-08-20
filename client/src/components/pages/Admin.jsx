@@ -26,7 +26,7 @@ const Admin = ({ setIsPasswordValid }) => {
 		e.preventDefault()
 		setLoading(true)
 		axios
-			.post('http://localhost:5000/api/rsvp/', {
+			.post('/api/rsvp/', {
 				name: guestName,
 				guestsInvited: guestsInvited,
 			})
@@ -42,7 +42,7 @@ const Admin = ({ setIsPasswordValid }) => {
 
 	const getList = async () => {
 		await axios
-			.get('http://localhost:5000/api/rsvp/')
+			.get('/api/rsvp/')
 			.then((res) => {
 				setGuestBook(res.data)
 			})
@@ -51,7 +51,7 @@ const Admin = ({ setIsPasswordValid }) => {
 
 	const deleteGuest = async (id) => {
 		await axios
-			.delete(`http://localhost:5000/api/rsvp/${id}`)
+			.delete(`/api/rsvp/${id}`)
 			.then((res) => {
 				getList()
 				setIsPasswordValid(true)
