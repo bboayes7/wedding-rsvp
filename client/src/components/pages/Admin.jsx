@@ -45,8 +45,9 @@ const Admin = ({ setIsPasswordValid }) => {
 			.get('/api/rsvp/')
 			.then((res) => {
 				setGuestBook(res.data)
+				console.log(res.data)
 			})
-			.catch((err) => console.log(err))
+			.catch((err) => console.log(err.response.data.message))
 	}
 
 	const deleteGuest = async (id) => {

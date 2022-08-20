@@ -8,8 +8,8 @@ const path = require('path')
 connectDB()
 
 const app = express()
-
-app.use(express.static(path.join(__dirname, 'client/build')))
+console.log()
+app.use(express.static(path.join(__dirname, '/client/build')))
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
