@@ -41,13 +41,17 @@ const Admin = ({ setIsPasswordValid }) => {
 	}
 
 	const getList = async () => {
-		await axios
-			.get('/api/rsvp/')
-			.then((res) => {
-				setGuestBook(res.data)
-				console.log(res.data)
-			})
-			.catch((err) => console.log(err.response.data.message))
+		try {
+			await axios
+				.get('/api/rsvp/')
+				.then((res) => {
+					setGuestBook(res.data)
+					console.log(res.data)
+				})
+				.catch((err) => console.log(err.response.data.message))
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	const deleteGuest = async (id) => {
