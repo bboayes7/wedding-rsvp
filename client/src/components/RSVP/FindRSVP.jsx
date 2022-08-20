@@ -18,7 +18,7 @@ const FindRSVP = ({
 			if (guestName === 'admin') {
 				navigate('/admin')
 			}
-			if (!guestName || guestName.length === 0 ) {
+			if (!guestName || guestName.length === 0) {
 				setGuestError(true)
 				setTimeout(() => {
 					setGuestError(false)
@@ -35,7 +35,7 @@ const FindRSVP = ({
 
 	const getRSVP = async (guestName) => {
 		await axios
-			.get(`http://localhost:5000/api/rsvp/${guestName}`)
+			.get(`/api/rsvp/${guestName}`)
 			.then((res) => {
 				setGuestBook(res.data)
 				if (res.data.length === 0) {
