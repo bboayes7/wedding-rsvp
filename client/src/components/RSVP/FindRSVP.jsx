@@ -35,7 +35,7 @@ const FindRSVP = ({
 
 	const getRSVP = async (guestName) => {
 		await axios
-			.get(`api/rsvp/${guestName}`)
+			.get(`/api/rsvp/${guestName}`)
 			.then((res) => {
 				setGuestBook(res.data)
 				if (res.data.length === 0) {
