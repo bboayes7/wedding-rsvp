@@ -23,10 +23,11 @@ const getRSVP = async (req, res) => {
 	if (!guestName) {
 		return res.status(400).json({ msg: 'No name provided' })
 	}
-	if (guestName.length < 2) {
-		return res.status(400).json({ msg: 'Name must be alphabetic' })
+	if (guestName === '.' || guestName === '*') {
+		return res.status(400).json({ msg: 'no' })
 	}
-	if (!guestName.match(/^[a-zA-Z]+$/)) {
+
+	if (guestName.length < 2) {
 		return res.status(400).json({ msg: 'Name must be alphabetic' })
 	}
 	try {
