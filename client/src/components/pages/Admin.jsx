@@ -246,9 +246,9 @@ const Admin = ({ setIsPasswordValid }) => {
 									>
 										<td
 											style={
-												guest.guestsAttending.length > 0 ?? {
-													backgroundColor: 'green',
-												}
+												guest.guestsAttending.length > 0
+													? { backgroundColor: 'green' }
+													: { backgroundColor: '#fff' }
 											}
 											onClick={() => setDetails(guest)}
 										>
