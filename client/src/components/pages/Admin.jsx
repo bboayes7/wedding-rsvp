@@ -246,7 +246,9 @@ const Admin = ({ setIsPasswordValid }) => {
 									>
 										<td
 											style={
-												guest.guestsAttending.length > 0
+												guest.guestsAttending.filter((decision) => {
+													return decision
+												}).length > 0
 													? { backgroundColor: 'green' }
 													: { backgroundColor: '#fff' }
 											}
