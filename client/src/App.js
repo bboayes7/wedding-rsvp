@@ -37,9 +37,7 @@ function App() {
 		<div className='container'>
 			{isPasswordValid ? (
 				<Router>
-					<Header
-						toggleSong={toggleSong}
-					/>
+					<Header toggleSong={toggleSong} playing={playing} />
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/travel' element={<Travel />} />
