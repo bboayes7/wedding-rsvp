@@ -43,7 +43,7 @@ const Admin = ({ setIsPasswordValid }) => {
 	const getList = async () => {
 		try {
 			await axios
-				.get('http://127.0.0.1:5000/api/rsvp/')
+				.get('api/rsvp/')
 				.then((res) => {
 					setGuestBook(res.data)
 					console.log(res.data)
@@ -56,7 +56,7 @@ const Admin = ({ setIsPasswordValid }) => {
 
 	const deleteGuest = async (id) => {
 		await axios
-			.delete(`/api/rsvp/${id}`)
+			.delete(`api/rsvp/${id}`)
 			.then((res) => {
 				getList()
 				setIsPasswordValid(true)
@@ -244,7 +244,16 @@ const Admin = ({ setIsPasswordValid }) => {
 										key={guest._id}
 										className='guest-row'
 									>
-										<td onClick={() => setDetails(guest)}>{guest.name}</td>
+										<td
+											style={
+												guest.guestsAttending > 0 ?? {
+													backgroundColor: 'lightgreen',
+												}
+											}
+											onClick={() => setDetails(guest)}
+										>
+											{guest.name}
+										</td>
 										<td onClick={() => setDetails(guest)}>
 											{guest.guestsInvited}
 										</td>
