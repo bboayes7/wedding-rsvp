@@ -26,7 +26,7 @@ const Admin = ({ setIsPasswordValid }) => {
 		e.preventDefault()
 		setLoading(true)
 		axios
-			.post('/api/rsvp/', {
+			.post('http://127.0.0.1:5000/api/rsvp/', {
 				name: guestName,
 				guestsInvited: guestsInvited,
 			})
@@ -43,7 +43,7 @@ const Admin = ({ setIsPasswordValid }) => {
 	const getList = async () => {
 		try {
 			await axios
-				.get('/api/rsvp/')
+				.get('http://127.0.0.1:5000/api/rsvp/')
 				.then((res) => {
 					setGuestBook(res.data)
 					console.log(res.data)

@@ -92,11 +92,19 @@ const Home = () => {
 					</li>
 				</ul>
 			</div>
+			<img className='fire-divider' src={fireDivider} alt='fire divider' />
+			<div className='page'>
+				<h3>Your presence at our wedding is the best gift!</h3>
+				<p>
+					If you feel inclined to leave a gift, we will have a box for cards at
+					the reception
+				</p>
+			</div>
 			<img src={knot} alt='knot divider' />
 			<div className='picture'>
 				<img src={savethedate} alt='save the date' />
 			</div>
-	
+
 			<img src={knot} alt='knot divider' />
 		</div>
 	)
