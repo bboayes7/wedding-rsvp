@@ -15,13 +15,21 @@ import comeasyouare from './assets/music/comeasyouare.mp3'
 
 function App() {
 	const [song] = useState(new Audio(comeasyouare))
+	const [playing, setPlaying] = useState(true)
 	const [isPasswordValid, setIsPasswordValid] = useState(false)
 
+	const toggleSong = () => {
+		if (playing == true) {
+			setPlaying(false)
+			song.pause()
+		} else {
+			setPlaying(true)
+			song.play()
+		}
+	}
 	useEffect(() => {
 		if (isPasswordValid) {
 			song.play()
-		} else {
-			song.pause()
 		}
 	}, [isPasswordValid, song])
 
@@ -29,7 +37,9 @@ function App() {
 		<div className='container'>
 			{isPasswordValid ? (
 				<Router>
-					<Header />
+					<Header
+						toggleSong={toggleSong}
+					/>
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/travel' element={<Travel />} />
@@ -37,14 +47,15 @@ function App() {
 						<Route path='/photos' element={<Photos />} />
 						<Route path='/rsvp' element={<RSVP />} />
 						<Route path='/thanks' element={<Thanks />} />
-						<Route path='/admin' element={<Admin  setIsPasswordValid={setIsPasswordValid}/>} />
+						<Route
+							path='/admin'
+							element={<Admin setIsPasswordValid={setIsPasswordValid} />}
+						/>
 					</Routes>
 					<Footer />
 				</Router>
 			) : (
-				<Password
-					setIsPasswordValid={setIsPasswordValid}
-				/>
+				<Password setIsPasswordValid={setIsPasswordValid} />
 			)}
 		</div>
 	)
